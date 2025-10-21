@@ -1,0 +1,23 @@
+{
+  "name": "procesos-de-ingeniera-del-software",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jasmine servidor/modeloSpec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SelfishCoconut/PROCESOS-DE-INGENIERA-DEL-SOFTWARE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SelfishCoconut/PROCESOS-DE-INGENIERA-DEL-SOFTWARE/issues"
+  },
+  "homepage": "https://github.com/SelfishCoconut/PROCESOS-DE-INGENIERA-DEL-SOFTWARE#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
