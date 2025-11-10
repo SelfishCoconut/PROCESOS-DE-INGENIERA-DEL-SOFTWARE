@@ -1,3 +1,4 @@
+const bodyParser=require("body-parser");
 const fs = require("fs");
 const express = require("express");
 const app = express();
@@ -34,13 +35,11 @@ app.get(
   }
 );
 app.get("/good", function (request, response) {
-  let nick = request.user.emails[0].value;
-  if (nick) {
-    sistema.agregarUsuario(nick);
-  }
-  //console.log(request.user.emails[0].value);
-  response.cookie("nick", nick);
-  response.redirect("/");
+  let email = request.user.emails[0].value;
+  sistema.usuarioGoogle({ email: email }, function (obj) {
+    response.cookie("nick", obj.email);
+    response.redirect("/");
+  });
 });
 
 app.get("/fallo", function (request, response) {
@@ -74,6 +73,14 @@ app.get("/eliminarUsuario/:nick", function (request, response) {
   let res = sistema.eliminarUsuario(nick);
   response.send(res);
 });
+app.post(
+  "/oneTap/callback",
+  passport.authenticate("google-one-tap", { failureRedirect: "/fallo" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/good");
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`App está escuchando en el puerto ${PORT}`);

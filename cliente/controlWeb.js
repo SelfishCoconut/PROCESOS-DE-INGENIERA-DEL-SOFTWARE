@@ -9,7 +9,7 @@ function ControlWeb() {
       cadena = cadena + '<label for="nick">Nick:</label>';
       cadena = cadena + '<p><input type="text" class="form-control" id="nick" placeholder="introduce un nick"></p>';
       cadena = cadena + '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
-      cadena=cadena+'<div><a href="/auth/google"><img src="./cliente/img/btn_google_signin_light_focus_web@2x.png" style="height:40px;"></a></div>';
+      cadena=cadena+'<div><a href="/auth/google"><img src="./cliente/img/google-signin.png" style="height:40px;"></a></div>';
       cadena = cadena + '</div>';
       cadena = cadena + '</div></div></div>';
       cadena = cadena + '<label for="nick">Name:</label>';
