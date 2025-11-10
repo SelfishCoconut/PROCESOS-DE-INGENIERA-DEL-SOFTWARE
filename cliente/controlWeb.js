@@ -1,20 +1,30 @@
 function ControlWeb() {
   this.mostrarAgregarUsuario = function () {
-    let cadena = '<div id="mAU" class="form-group">';
-    cadena = cadena + '<label for="nick">Name:</label>';
-    cadena = cadena + '<input type="text" class="form-control" id="nick">';
-    cadena =
-      cadena +
-      '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
-    cadena = cadena + "</div>";
-    $("#au").empty();
-    $("#au").append(cadena);
-    $("#btnAU").on("click", function () {
-      let nick = $("#nick").val();
-      rest.agregarUsuario(nick);
-      $("#mAU").remove();
-    });
-  };
+    this.mostrarAgregarUsuario=function(){
+      $('#bnv').remove();
+      $('#mAU').remove();
+      let cadena='<div id="mAU">';
+      cadena = cadena + '<div class="card"><div class="card-body">';
+      cadena = cadena +'<div class="form-group">';
+      cadena = cadena + '<label for="nick">Nick:</label>';
+      cadena = cadena + '<p><input type="text" class="form-control" id="nick" placeholder="introduce un nick"></p>';
+      cadena = cadena + '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
+      cadena=cadena+'<div><a href="/auth/google"><img src="./cliente/img/btn_google_signin_light_focus_web@2x.png" style="height:40px;"></a></div>';
+      cadena = cadena + '</div>';
+      cadena = cadena + '</div></div></div>';
+      cadena = cadena + '<label for="nick">Name:</label>';
+      cadena = cadena + '<input type="text" class="form-control" id="nick">';
+      cadena = cadena + '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
+      cadena = cadena + "</div>";
+      $("#au").empty();
+      $("#au").append(cadena);
+      $("#btnAU").on("click", function () {
+        let nick = $("#nick").val();
+        rest.agregarUsuario(nick);
+        $("#mAU").remove();
+      });
+    };
+  }
 
   this.mostrarObtenerUsuarios = function () {
     let cadena = '<div id="mOEU" class="form-group">';
