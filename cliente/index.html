@@ -22,6 +22,8 @@
 </head>
 
 <body>
+    <div id="g_id_onload" data-client_id="544296108633-gimk99ajj3liilaf8no5c928o1pm1a36.apps.googleusercontent.com"
+        data-login_uri=https://url/oneTap/callback data-skip_prompt_cookie="nick"></div>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <!-- Brand/logo -->
         <a class="navbar-brand" href="#">Logo</a>
@@ -36,22 +38,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="cw.mostrarObtenerUsuarios()">Usuarios</a>
             </li>
-            <a id="g_id_onload"
-                data-client_id="544296108633-gimk99ajj3liilaf8no5c928o1pm1a36.apps.googleusercontent.com"
-                data-login_uri=https://url/oneTap/callback data-skip_prompt_cookie="nick">Login</a>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="cw.mostrarLogin()">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="cw.salir()">Logout</a>
+            </li>
 
         </ul>
     </nav>
-    <div class="container-fluid">
+    <div class="container">
+        <h3>Sistema</h3>
         <div id="au"></div>
+        <div id="registro"></div>
+        <div id="msg"></div>
     </div>
 
     <script>
         let cw = new ControlWeb();
         let rest = new ClienteRest(cw);
-        rest.agregarUsuario("pepito");
+        //rest.agregarUsuario("pepito");
         cw.comprobarSesion();
-        cw.salir(); 
+        //cw.salir(); 
     </script>
 </body>
 

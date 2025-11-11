@@ -1,30 +1,76 @@
+
+
 function ControlWeb() {
   this.mostrarAgregarUsuario = function () {
-    this.mostrarAgregarUsuario=function(){
-      $('#bnv').remove();
-      $('#mAU').remove();
-      let cadena='<div id="mAU">';
-      cadena = cadena + '<div class="card"><div class="card-body">';
-      cadena = cadena +'<div class="form-group">';
-      cadena = cadena + '<label for="nick">Nick:</label>';
-      cadena = cadena + '<p><input type="text" class="form-control" id="nick" placeholder="introduce un nick"></p>';
-      cadena = cadena + '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
-      cadena=cadena+'<div><a href="/auth/google"><img src="./cliente/img/google-signin.png" style="height:40px;"></a></div>';
-      cadena = cadena + '</div>';
-      cadena = cadena + '</div></div></div>';
-      cadena = cadena + '<label for="nick">Name:</label>';
-      cadena = cadena + '<input type="text" class="form-control" id="nick">';
-      cadena = cadena + '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
-      cadena = cadena + "</div>";
-      $("#au").empty();
-      $("#au").append(cadena);
-      $("#btnAU").on("click", function () {
-        let nick = $("#nick").val();
-        rest.agregarUsuario(nick);
-        $("#mAU").remove();
+    $("#bnv").remove();
+    $("#mAU").remove();
+    let cadena = '<div id="mAU">';
+    cadena = cadena + '<div class="card"><div class="card-body">';
+    cadena = cadena + '<div class="form-group">';
+    cadena = cadena + '<label for="nick">Nick:</label>';
+    cadena =
+      cadena +
+      '<p><input type="text" class="form-control" id="nick" placeholder="introduce un nick"></p>';
+    cadena =
+      cadena +
+      '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
+    cadena =
+      cadena +
+      '<div><a href="/auth/google"><img src="./cliente/img/google-signin.png" style="height:40px;"></a></div>';
+    cadena = cadena + "</div>";
+    cadena = cadena + "</div></div></div>";
+    cadena = cadena + '<label for="nick">Name:</label>';
+    cadena = cadena + '<input type="text" class="form-control" id="nick">';
+    cadena =
+      cadena +
+      '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
+    cadena = cadena + "</div>";
+    $("#au").empty();
+    $("#au").append(cadena);
+    $("#btnAU").on("click", function () {
+      let nick = $("#nick").val();
+      rest.agregarUsuario(nick);
+      $("#mAU").remove();
+    });
+  };
+  this.mostrarLogin = function () {
+    $("#fmLogin").remove();
+    $("#registro").load("./cliente/login.html", function () {
+      $("#btnLogin").on("click", function (e) {
+        e.preventDefault();
+        let email = $("#email").val();
+        let pwd = $("#pwd").val();
+
+        if (email && pwd) {
+          rest.loginUsuario(email, pwd);
+          console.log(email + " " + pwd);
+        }
       });
-    };
-  }
+    });
+  };
+
+  this.mostrarRegistro = function () {
+    $("#fmRegistro").remove();
+    $("#registro").load("./cliente/registro.html", function () {
+      $("#btnRegistro").on("click", function (e) {
+        e.preventDefault();
+        let nick = $("#nombre").val();
+        let email = $("#email").val();
+        let pwd = $("#pwd").val();
+        if (email && pwd) {
+          rest.registrarUsuario(email, pwd);
+          console.log(email + " " + pwd);
+        }
+      });
+    });
+  };
+
+  this.limpiar = function () {
+    $("#au").empty();
+    $("#registro").empty();
+    $("#msg").empty();
+  };
+
 
   this.mostrarObtenerUsuarios = function () {
     let cadena = '<div id="mOEU" class="form-group">';
@@ -108,17 +154,17 @@ function ControlWeb() {
     if (nick) {
       this.mostrarMensaje("Bienvenido al sistema, " + nick);
     } else {
-      this.mostrarAgregarUsuario();
+      this.mostrarMensaje("No has iniciado sesión");
+      this.mostrarRegistro();
     }
   };
 
   this.mostrarMensaje = function (msg) {
-    console.log(msg+"a");
+    console.log(msg);
   };
 
-
   this.salir = function () {
-    $.cookie("nick");
-    //location.reload();
+    $.removeCookie("nick");
+    location.reload();
   };
 }

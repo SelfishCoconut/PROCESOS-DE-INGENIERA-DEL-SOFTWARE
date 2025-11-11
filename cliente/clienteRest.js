@@ -1,4 +1,4 @@
-function ClienteRest(p_cw ) {
+function ClienteRest(p_cw) {
   var cw = p_cw;
   this.agregarUsuario = function (nick) {
     var cli = this;
@@ -14,6 +14,31 @@ function ClienteRest(p_cw ) {
       cw.mostrarMensaje(msg);
     });
   };
+  this.loginUsuario = function (email, password) {
+    $.ajax({
+      type: "POST",
+      url: "/loginUsuario",
+      data: JSON.stringify({ email: email, password: password }),
+      success: function (data) {
+        if (data.nick != -1) {
+          console.log("Usuario " + data.nick + " ha iniciado sesión");
+          $.cookie("nick", data.nick);
+          cw.limpiar();
+          cw.mostrarMensaje("Bienvenido al sistema, " + data.nick);
+        } else {
+          console.log("No se pudo iniciar sesión");
+          cw.mostrarLogin();
+        }
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+      },
+      contentType: "application/json",
+    });
+  };
+
+
   this.agregarUsuario2 = function (nick) {
     $.ajax({
       type: "GET",
@@ -51,6 +76,30 @@ function ClienteRest(p_cw ) {
   this.eliminarUsuario = function (nick) {
     $.getJSON("/eliminarUsuario/" + nick, function (data) {
       console.log("Respuesta del servidor: " + JSON.stringify(data));
+    });
+  };
+
+  this.registrarUsuario = function (email, password) {
+    $.ajax({
+      type: "POST",
+      url: "/registrarUsuario",
+      data: JSON.stringify({ email: email, password: password }),
+      success: function (data) {
+        if (data.nick != -1) {
+          console.log("Usuario " + data.nick + " ha sidoregistrado");
+          $.cookie("nick", data.nick);
+          cw.limpiar();
+          cw.mostrarMensaje("Bienvenido al sistema," + data.nick);
+          cw.mostrarLogin();
+        } else {
+          console.log("El nick está ocupado");
+        }
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+      },
+      contentType: "application/json",
     });
   };
 }

@@ -1,7 +1,9 @@
-const bodyParser=require("body-parser");
+const bodyParser = require("body-parser");
 const fs = require("fs");
 const express = require("express");
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./servidor/passport-setup.js");
@@ -85,4 +87,22 @@ app.post(
 app.listen(PORT, () => {
   console.log(`App está escuchando en el puerto ${PORT}`);
   console.log("Ctrl+C para salir");
+});
+
+app.post("/registrarUsuario", function (request, response) {
+  console.log(request.body);
+  sistema.registrarUsuario(request.body, function (res) {
+    response.send({ nick: res.email });
+  });
+
+  app.post("/loginUsuario", function (request, response) {
+    sistema.loginUsuario(request.body, function (res) {
+      if (res.email && res.email != -1) {
+        response.send({ nick: res.email });
+      } else {
+        response.send({ nick: -1 });
+      }
+    });
+  });
+
 });
