@@ -34,6 +34,9 @@ function ControlWeb() {
     });
   };
   this.mostrarLogin = function () {
+    if ($.cookie("nick")) {
+      return true;
+    }
     $("#fmLogin").remove();
     $("#registro").load("./cliente/login.html", function () {
       $("#btnLogin").on("click", function (e) {
@@ -155,7 +158,8 @@ function ControlWeb() {
       this.mostrarMensaje("Bienvenido al sistema, " + nick);
     } else {
       this.mostrarMensaje("No has iniciado sesión");
-      this.mostrarRegistro();
+      //this.mostrarRegistro();
+      this.mostrarLogin();
     }
   };
 

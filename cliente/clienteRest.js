@@ -87,7 +87,6 @@ function ClienteRest(p_cw) {
       success: function (data) {
         if (data.nick != -1) {
           console.log("Usuario " + data.nick + " ha sidoregistrado");
-          $.cookie("nick", data.nick);
           cw.limpiar();
           cw.mostrarMensaje("Bienvenido al sistema," + data.nick);
           cw.mostrarLogin();

@@ -90,19 +90,18 @@ app.listen(PORT, () => {
 });
 
 app.post("/registrarUsuario", function (request, response) {
-  console.log(request.body);
   sistema.registrarUsuario(request.body, function (res) {
     response.send({ nick: res.email });
   });
+});
 
-  app.post("/loginUsuario", function (request, response) {
-    sistema.loginUsuario(request.body, function (res) {
-      if (res.email && res.email != -1) {
-        response.send({ nick: res.email });
-      } else {
-        response.send({ nick: -1 });
-      }
-    });
+app.post("/loginUsuario", function (request, response) {
+  console.log("---- " + request.body);
+  sistema.loginUsuario(request.body, function (res) {
+    if (res.email && res.email != -1) {
+      response.send({ nick: res.email });
+    } else {
+      response.send({ nick: -1 });
+    }
   });
-
 });
